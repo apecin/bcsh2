@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\sportoviste_sem_bcsh2.props" />
+</Project>
