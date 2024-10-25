@@ -1,0 +1,14 @@
+﻿@model Hriste
+
+<h2>Přidat nové hřiště</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Nazev"></label>
+        <input asp-for="Nazev" class="form-control" />
+        <span asp-validation-for="Nazev" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Uložit</button>
+    <a asp-action="Index" class="btn btn-secondary">Zpět na seznam</a>
+</form>
