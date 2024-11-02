@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EpDXES+hbzzv+cNYE8pk4A6kWhQWa3q1zwhJB2c1o4s=",
+  "Hash": "a0ufnE8HARCZGXGs96sKTkcbtuOEYSExBgIXTZdeOrQ=",
   "Source": "sportoviste_sem_bcsh2",
   "BasePath": "_content/sportoviste_sem_bcsh2",
   "Mode": "Default",
@@ -74,12 +74,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\ntb\\source\\repos\\bcsh2_sem\\sportoviste_sem_bcsh2\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\ntb\\source\\repos\\bcsh2_sem\\sportoviste_sem_bcsh2\\wwwroot\\favicona.ico",
       "SourceId": "sportoviste_sem_bcsh2",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ntb\\source\\repos\\bcsh2_sem\\sportoviste_sem_bcsh2\\wwwroot\\",
       "BasePath": "_content/sportoviste_sem_bcsh2",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "favicona.ico",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,7 +90,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\favicona.ico"
     },
     {
       "Identity": "C:\\Users\\ntb\\source\\repos\\bcsh2_sem\\sportoviste_sem_bcsh2\\wwwroot\\js\\site.js",
