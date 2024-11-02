@@ -1,29 +1,36 @@
-﻿@model IEnumerable<Field>
+﻿@model IEnumerable<Hriste>
 
 <h2>Seznam Hřišť</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Název</th>
-            <th>Akce</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var field in Model)
-        {
+@if (Model == null || !Model.Any())
+{
+    <p>Žádná data nebyla nalezena.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@field.Id</td>
-                <td>@field.Name</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@field.Id">Detail</a> |
-                    <a asp-action="Edit" asp-route-id="@field.Id">Editovat</a> |
-                    <a asp-action="Delete" asp-route-id="@field.Id">Odstranit</a>
-                </td>
+                <th>ID</th>
+                <th>Název</th>
+                <th>Akce</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var hriste in Model)
+            {
+                <tr>
+                    <td>@hriste.Id</td>
+                    <td>@hriste.Nazev</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@hriste.Id">Detail</a> |
+                        <a asp-action="Edit" asp-route-id="@hriste.Id">Editovat</a> |
+                        <a asp-action="Delete" asp-route-id="@hriste.Id">Odstranit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
-<a asp-action="Create" class="btn btn-primary">Přidat nové hřiště</a>
+<a asp-action="Create" class="btn btn-secondary">Přidat nové hřiště</a>
