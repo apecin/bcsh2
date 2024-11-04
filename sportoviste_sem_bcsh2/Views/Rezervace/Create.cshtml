@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Vytvořit rezervaci";
+}
+
+<h2>Vytvořit novou rezervaci</h2>
+
+<form method="post" action="/Rezervace/Create">
+    <div class="mb-3">
+        <label for="hriste" class="form-label">Hřiště</label>
+        <input type="text" class="form-control" id="hriste" name="Hriste" required>
+    </div>
+    <div class="mb-3">
+        <label for="klient" class="form-label">Klient</label>
+        <input type="text" class="form-control" id="klient" name="Klient" required>
+    </div>
+    <div class="mb-3">
+        <label for="cas" class="form-label">Čas</label>
+        <input type="text" class="form-control" id="cas" name="Cas" required>
+    </div>
+    <button type="submit" class="btn btn-success">Vytvořit</button>
+</form>
+
+<a href="/Rezervace" class="btn btn-secondary mt-3">Zpět na seznam rezervací</a>
