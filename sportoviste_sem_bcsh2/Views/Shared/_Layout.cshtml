@@ -22,8 +22,20 @@
                         <li class="nav-item"><a class="nav-link" href="/Sportoviste">Sportoviště</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Hriste">Hřiště</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Rezervace">Rezervace</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Klienti">Klienti</a></li>
                     </ul>
+
+                    <!-- Sekce pro přihlášení/odhlášení -->
+                    <div class="d-flex align-items-center">
+                        @if (string.IsNullOrEmpty(Context.Session.GetString("UzivatelJmeno")))
+                        {
+                            <a class="btn btn-outline-primary" href="/Autentizace/Prihlaseni">Přihlásit se</a>
+                        }
+                        else
+                        {
+                            <span class="navbar-text">Přihlášený: @Context.Session.GetString("UzivatelJmeno")</span>
+                            <a class="btn btn-outline-danger ms-3" href="/Autentizace/Odhlaseni">Odhlásit se</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
