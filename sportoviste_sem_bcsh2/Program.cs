@@ -11,6 +11,7 @@ namespace sportoviste_sem_bcsh2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession(); // Pøidání služby session
 
             // Pøidání LiteDB jako singletonové služby
             builder.Services.AddSingleton<LiteDatabase>(_ => new LiteDatabase("Filename=rezervace.db;Connection=shared"));
@@ -31,6 +32,7 @@ namespace sportoviste_sem_bcsh2
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession(); // Pøidání middlewaru pro session
 
             app.MapControllerRoute(
                 name: "default",
