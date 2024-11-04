@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using sportoviste_sem_bcsh2.Models;
 using LiteDB;
-using System.Linq; // Pro použití metody Any()
+using System.Linq;
 
 namespace sportoviste_sem_bcsh2.Controllers
 {

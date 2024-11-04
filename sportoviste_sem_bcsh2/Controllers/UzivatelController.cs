@@ -1,45 +1,48 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using sportoviste_sem_bcsh2.Models;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 
 namespace sportoviste_sem_bcsh2.Controllers
 {
-    public class AutentizaceController : Controller
+    public class UzivatelController : Controller
     {
-        //zkoušecí data uživatelů
+        // Mock uživatelé pro testování
         private static List<Uzivatel> mockUzivatele = new List<Uzivatel>
         {
-            new Uzivatel { Id = 1, Jmeno = "Jan Novák", Email = "jan@novak.cz", Heslo = "heslo" },
-            new Uzivatel { Id = 2, Jmeno = "Petr Svoboda", Email = "petr@svoboda.cz", Heslo = "heslo" }
+            new Uzivatel { Id = 1, Jmeno = "Jan Novák", Email = "jan@novak.cz", Heslo = "heslo123" },
+            new Uzivatel { Id = 2, Jmeno = "Petr Svoboda", Email = "petr@svoboda.cz", Heslo = "tajneheslo" }
         };
 
-        // GET: Autentizace/Prihlaseni
+        // GET: Uzivatel/Prihlaseni
         public IActionResult Prihlaseni()
         {
             return View();
         }
 
-        // POST: Autentizace/Prihlaseni
+        // POST: Uzivatel/Prihlaseni
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Prihlaseni(string email, string heslo)
         {
             var uzivatel = mockUzivatele.Find(u => u.Email == email && u.Heslo == heslo);
+
             if (uzivatel != null)
             {
                 // Uložení informací o uživateli do session
                 HttpContext.Session.SetString("UzivatelJmeno", uzivatel.Jmeno);
                 HttpContext.Session.SetInt32("UzivatelId", uzivatel.Id);
 
+                // Přesměrování na hlavní stránku (nebo jinou stránku dle potřeby)
                 return RedirectToAction("Index", "Home");
             }
 
+            // Chybová zpráva pro špatné přihlašovací údaje
             ViewBag.Zprava = "Neplatné přihlašovací údaje.";
             return View();
         }
 
-        // GET: Autentizace/Odhlaseni
+        // GET: Uzivatel/Odhlaseni
         public IActionResult Odhlaseni()
         {
             // Vymazání uživatelských údajů ze session
