@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Přihlášení";
+}
+
+<h2>Přihlášení</h2>
+
+@if (ViewBag.Zprava != null)
+{
+    <div class="alert alert-danger">@ViewBag.Zprava</div>
+}
+
+<form method="post" action="/Autentizace/Prihlaseni">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="mb-3">
+        <label for="heslo" class="form-label">Heslo</label>
+        <input type="password" class="form-control" id="heslo" name="heslo" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Přihlásit se</button>
+</form>

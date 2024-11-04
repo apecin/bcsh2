@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/ntb/source/repos/bcsh2_sem/sportoviste_sem_bcsh2/Views/Autentizace/Prihlaseni.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0ZW50aXphY2VcUHJpaGxhc2VuaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ntb/source/repos/bcsh2_sem/sportoviste_sem_bcsh2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

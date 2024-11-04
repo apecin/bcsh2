@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sportoviste_sem_bcsh2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cead9821c1f1079142d76d3f15522fbbcd8cfc3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2cdb224a44e50715c35d07762852676b97d695bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("sportoviste_sem_bcsh2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sportoviste_sem_bcsh2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

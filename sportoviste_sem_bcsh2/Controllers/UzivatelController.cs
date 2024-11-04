@@ -7,7 +7,7 @@ namespace sportoviste_sem_bcsh2.Controllers
 {
     public class AutentizaceController : Controller
     {
-        // Pro zjednodušení použijeme mock uživatele (v reálném projektu načítej uživatele z databáze)
+        //zkoušecí data uživatelů
         private static List<Uzivatel> mockUzivatele = new List<Uzivatel>
         {
             new Uzivatel { Id = 1, Jmeno = "Jan Novák", Email = "jan@novak.cz", Heslo = "heslo" },
