@@ -1,3 +1,6 @@
+using LiteDB;
+using sportoviste_sem_bcsh2.Models;
+
 namespace sportoviste_sem_bcsh2
 {
     public class Program
@@ -8,6 +11,9 @@ namespace sportoviste_sem_bcsh2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Pøidání LiteDB jako singletonové služby
+            builder.Services.AddSingleton<LiteDatabase>(_ => new LiteDatabase("Filename=rezervace.db;Connection=shared"));
 
             var app = builder.Build();
 
