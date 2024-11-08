@@ -1,101 +1,70 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using LiteDB;
 using sportoviste_sem_bcsh2.Models;
-using System.Collections.Generic;
+using sportoviste_sem_bcsh2.Services;
 
 namespace sportoviste_sem_bcsh2.Controllers
 {
     public class RezervaceController : Controller
     {
-        private readonly LiteDatabase _db;
+        private readonly LiteDbService _dbService;
 
-        public RezervaceController(LiteDatabase db)
+        public RezervaceController(LiteDbService dbService)
         {
-            _db = db;
+            _dbService = dbService;
         }
 
-        public IActionResult Index()
-        {
-            var rezervaceCollection = _db.GetCollection<Rezervace>("rezervace");
-            var rezervaceList = rezervaceCollection.FindAll();
-            return View(rezervaceList);
-        }
+        public IActionResult Index() => View(_dbService.GetAllRezervace());
 
         public IActionResult Details(int id)
         {
-            var rezervaceCollection = _db.GetCollection<Rezervace>("rezervace");
-            var rezervace = rezervaceCollection.FindById(id);
-            if (rezervace == null) return NotFound();
-            return View(rezervace);
+            var rezervace = _dbService.GetRezervaceById(id);
+            return rezervace == null ? NotFound() : View(rezervace);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Rezervace rezervace)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var rezervaceCollection = _db.GetCollection<Rezervace>("rezervace");
-                rezervaceCollection.Insert(rezervace);
+                _dbService.InsertRezervace(rezervace);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(rezervace);
         }
 
         public IActionResult Edit(int id)
         {
-            var rezervaceCollection = _db.GetCollection<Rezervace>("rezervace");
-            var rezervace = rezervaceCollection.FindById(id);
-            if (rezervace == null) return NotFound();
-            return View(rezervace);
+            var rezervace = _dbService.GetRezervaceById(id);
+            return rezervace == null ? NotFound() : View(rezervace);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Rezervace updatedRezervace)
+        public IActionResult Edit(Rezervace rezervace)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var rezervaceCollection = _db.GetCollection<Rezervace>("rezervace");
-                rezervaceCollection.Update(updatedRezervace);
+                _dbService.UpdateRezervace(rezervace);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(rezervace);
         }
 
         public IActionResult Delete(int id)
         {
-            var rezervaceCollection = _db.GetCollection<Rezervace>("rezervace");
-            var rezervace = rezervaceCollection.FindById(id);
-            if (rezervace == null) return NotFound();
-            return View(rezervace);
+            var rezervace = _dbService.GetRezervaceById(id);
+            return rezervace == null ? NotFound() : View(rezervace);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                var rezervaceCollection = _db.GetCollection<Rezervace>("rezervace");
-                rezervaceCollection.Delete(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _dbService.DeleteRezervace(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

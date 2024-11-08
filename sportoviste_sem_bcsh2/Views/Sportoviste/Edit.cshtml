@@ -1,0 +1,17 @@
+﻿@model sportoviste_sem_bcsh2.Models.Sportoviste
+@{
+    ViewData["Title"] = "Upravit sportoviště";
+}
+
+<h2>Upravit sportoviště</h2>
+
+<form method="post" asp-action="Edit">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="mb-3">
+        <label for="nazev" class="form-label">Název</label>
+        <input type="text" class="form-control" id="nazev" name="Nazev" value="@Model.Nazev" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Uložit změny</button>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam sportovišť</a>

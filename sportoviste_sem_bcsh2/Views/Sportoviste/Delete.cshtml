@@ -1,0 +1,19 @@
+﻿@model sportoviste_sem_bcsh2.Models.Sportoviste
+@{
+    ViewData["Title"] = "Smazat sportoviště";
+}
+
+<h2>Smazat sportoviště</h2>
+
+<p>Opravdu chcete smazat toto sportoviště?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Název</dt>
+    <dd class="col-sm-9">@Model.Nazev</dd>
+</dl>
+
+<form method="post" asp-action="Delete">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Smazat</button>
+    <a asp-action="Index" class="btn btn-secondary">Zpět na seznam</a>
+</form>

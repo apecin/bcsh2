@@ -1,0 +1,31 @@
+﻿@model Hriste
+
+@{
+    ViewData["Title"] = "Detail hřiště";
+}
+
+<h2>Detail hřiště: @Model.Nazev</h2>
+
+<dl class="row">
+    <dt class="col-sm-3">Název</dt>
+    <dd class="col-sm-9">@Model.Nazev</dd>
+
+    <dt class="col-sm-3">Typ</dt>
+    <dd class="col-sm-9">@Model.Typ</dd>
+
+    <dt class="col-sm-3">Příslušné sportoviště</dt>
+    <dd class="col-sm-9">
+        @if (Model.Sportoviste != null)
+        {
+            <a href="/Sportoviste/Details/@Model.Sportoviste.Id">@Model.Sportoviste.Nazev</a>
+        }
+        else
+        {
+            <span class="text-danger">Žádné sportoviště není přiřazeno.</span>
+        }
+    </dd>
+</dl>
+
+<a href="/Hriste/Edit/@Model.Id" class="btn btn-warning">Upravit</a>
+<a href="/Hriste/Delete/@Model.Id" class="btn btn-danger">Smazat</a>
+<a href="/Hriste" class="btn btn-secondary">Zpět na seznam hřišť</a>

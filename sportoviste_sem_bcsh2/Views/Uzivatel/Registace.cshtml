@@ -1,0 +1,37 @@
+﻿@model sportoviste_sem_bcsh2.Models.Uzivatel
+@{
+    ViewData["Title"] = "Registrace";
+}
+
+<h2>Registrace</h2>
+
+@if (ViewBag.Zprava != null)
+{
+    <div class="alert alert-danger">@ViewBag.Zprava</div>
+}
+
+<form method="post" asp-action="Registrace">
+    <div class="mb-3">
+        <label for="jmeno" class="form-label">Jméno</label>
+        <input type="text" class="form-control" id="jmeno" name="Jmeno" required>
+    </div>
+    <div class="mb-3">
+        <label for="prijmeni" class="form-label">Příjmení</label>
+        <input type="text" class="form-control" id="prijmeni" name="Prijmeni" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="Email" required>
+    </div>
+    <div class="mb-3">
+        <label for="telefon" class="form-label">Telefon</label>
+        <input type="text" class="form-control" id="telefon" name="Telefon" required>
+    </div>
+    <div class="mb-3">
+        <label for="heslo" class="form-label">Heslo</label>
+        <input type="password" class="form-control" id="heslo" name="Heslo" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrovat</button>
+</form>
+
+<a href="/Uzivatel/Prihlaseni" class="btn btn-secondary mt-3">Zpět na přihlášení</a>

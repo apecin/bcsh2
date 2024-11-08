@@ -1,5 +1,8 @@
 using LiteDB;
+using Microsoft.AspNetCore.DataProtection;
 using sportoviste_sem_bcsh2.Models;
+using sportoviste_sem_bcsh2.Services;
+using System.IO;
 
 namespace sportoviste_sem_bcsh2
 {
@@ -11,18 +14,30 @@ namespace sportoviste_sem_bcsh2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSession(); // Pøidání služby session
 
-            // Pøidání LiteDB jako singletonové služby
-            builder.Services.AddSingleton<LiteDatabase>(_ => new LiteDatabase("Filename=rezervace.db;Connection=shared"));
+            // Pøidání služby pro session s èasovým limitem
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Timeout po 30 minutách neaktivity
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
+            // Konfigurace Data Protection (pøed builder.Build())
+            builder.Services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(@"./keys"))
+                .SetApplicationName("sportoviste_sem_bcsh2");
+
+            // Registrace LiteDbService jako singletonu
+            builder.Services.AddSingleton<LiteDbService>();
+
+            // Sestavení aplikace
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -31,8 +46,9 @@ namespace sportoviste_sem_bcsh2
 
             app.UseRouting();
 
+            // Použití middlewaru pro autorizaci a session
             app.UseAuthorization();
-            app.UseSession(); // Pøidání middlewaru pro session
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

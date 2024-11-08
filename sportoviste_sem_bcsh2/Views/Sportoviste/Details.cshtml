@@ -1,0 +1,28 @@
+﻿@model Sportoviste
+
+@{
+    ViewData["Title"] = "Detail sportoviště";
+}
+
+<h2>Detail sportoviště: @Model.Nazev</h2>
+
+<dl class="row">
+    <dt class="col-sm-3">Název</dt>
+    <dd class="col-sm-9">@Model.Nazev</dd>
+</dl>
+
+<h3>Hřiště</h3>
+@if (Model.Hriste != null && Model.Hriste.Any())
+{
+    <ul>
+        @foreach (var hriste in Model.Hriste)
+        {
+            <li>@hriste.Nazev - @hriste.Typ</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Žádné hřiště není přidáno k tomuto sportovišti.</p>
+}
+<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam sportovišť</a>

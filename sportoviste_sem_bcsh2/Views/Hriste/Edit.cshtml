@@ -1,0 +1,40 @@
+﻿@model Hriste
+
+@{
+    ViewData["Title"] = "Upravit hřiště";
+}
+
+<h2>Upravit hřiště</h2>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    
+    <div class="mb-3">
+        <label asp-for="Nazev" class="form-label">Název hřiště</label>
+        <input asp-for="Nazev" class="form-control" required />
+        <span asp-validation-for="Nazev" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="Typ" class="form-label">Typ hřiště</label>
+        <input asp-for="Typ" class="form-control" required />
+        <span asp-validation-for="Typ" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SportovisteId" class="form-label">Sportoviště</label>
+        <select asp-for="SportovisteId" class="form-control" required>
+            <option value="">-- Vyberte sportoviště --</option>
+            @foreach (var sportoviste in ViewBag.SportovisteList)
+            {
+                <option value="@sportoviste.Id">@sportoviste.Nazev</option>
+            }
+        </select>
+        <span asp-validation-for="SportovisteId" class="text-danger"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-success">Uložit změny</button>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam hřišť</a>

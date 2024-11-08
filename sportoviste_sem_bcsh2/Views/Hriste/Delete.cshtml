@@ -1,0 +1,11 @@
+﻿@model Hriste
+
+<h2>Opravdu chcete smazat hřiště?</h2>
+<p>@Model.Nazev</p>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Ano, smazat</button>
+    <a asp-action="Index" class="btn btn-secondary">Zpět na seznam hřišť</a>
+</form>
