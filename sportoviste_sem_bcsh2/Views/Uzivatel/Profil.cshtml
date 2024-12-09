@@ -1,0 +1,32 @@
+﻿@model sportoviste_sem_bcsh2.Models.Uzivatel
+
+@{
+    ViewData["Title"] = "Profil uživatele";
+}
+
+<h2>Profil uživatele</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<dl class="row">
+    <dt class="col-sm-3">Jméno</dt>
+    <dd class="col-sm-9">@Model.Jmeno</dd>
+
+    <dt class="col-sm-3">Příjmení</dt>
+    <dd class="col-sm-9">@Model.Prijmeni</dd>
+
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+
+    <dt class="col-sm-3">Telefon</dt>
+    <dd class="col-sm-9">@Model.Telefon</dd>
+
+    <dt class="col-sm-3">Role</dt>
+    <dd class="col-sm-9">@Model.Role</dd>
+</dl>
+
+<a asp-action="Odhlaseni" class="btn btn-danger">Odhlásit se</a>
+<a href="/Home/Index" class="btn btn-secondary mt-3">Zpět na úvodní stránku</a>

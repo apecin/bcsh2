@@ -90,8 +90,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXppdmF0ZWxcUHJpaGxhc2VuaS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ntb/source/repos/bcsh2_sem/sportoviste_sem_bcsh2/Views/Uzivatel/Registace.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXppdmF0ZWxcUmVnaXN0YWNlLmNzaHRtbA==
+[C:/Users/ntb/source/repos/bcsh2_sem/sportoviste_sem_bcsh2/Views/Uzivatel/Profil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXppdmF0ZWxcUHJvZmlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ntb/source/repos/bcsh2_sem/sportoviste_sem_bcsh2/Views/Uzivatel/Registrace.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXppdmF0ZWxcUmVnaXN0cmFjZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ntb/source/repos/bcsh2_sem/sportoviste_sem_bcsh2/Views/_ViewImports.cshtml]

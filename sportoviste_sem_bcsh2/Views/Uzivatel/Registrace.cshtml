@@ -2,6 +2,16 @@
 @{
     ViewData["Title"] = "Registrace";
 }
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
 
 <h2>Registrace</h2>
 
@@ -11,6 +21,7 @@
 }
 
 <form method="post" asp-action="Registrace">
+    <input type="hidden" name="Role" value="User" />
     <div class="mb-3">
         <label for="jmeno" class="form-label">Jméno</label>
         <input type="text" class="form-control" id="jmeno" name="Jmeno" required>
@@ -33,5 +44,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Registrovat</button>
 </form>
+
 
 <a href="/Uzivatel/Prihlaseni" class="btn btn-secondary mt-3">Zpět na přihlášení</a>

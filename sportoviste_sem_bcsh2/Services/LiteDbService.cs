@@ -130,11 +130,14 @@ namespace sportoviste_sem_bcsh2.Services
         {
             if (uzivatel.Id == 0)
             {
-                uzivatel.Id = (Uzivatele.Max(x => (int?)x.Id) ?? 0) + 1;
+                // Zkontroluje, zda kolekce obsahuje záznamy, jinak nastaví Id na 1
+                uzivatel.Id = Uzivatele.Count() > 0 ? Uzivatele.Max(x => x.Id) + 1 : 1;
             }
+
             Console.WriteLine($"Vkládám uživatele: Jméno = {uzivatel.Jmeno}, Id = {uzivatel.Id}");
             Uzivatele.Insert(uzivatel);
         }
+
 
         public void UpdateUzivatel(Uzivatel uzivatel) => Uzivatele.Update(uzivatel);
 

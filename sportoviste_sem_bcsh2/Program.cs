@@ -15,6 +15,8 @@ namespace sportoviste_sem_bcsh2
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDistributedMemoryCache();  // Používá in-memory cache pro session
+
             // Pøidání služby pro session s èasovým limitem
             builder.Services.AddSession(options =>
             {

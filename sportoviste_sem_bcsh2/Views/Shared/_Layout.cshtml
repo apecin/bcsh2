@@ -33,9 +33,11 @@
                         else
                         {
                             <span class="navbar-text">Přihlášený: @Context.Session.GetString("UzivatelJmeno")</span>
+                            <a class="btn btn-outline-primary ms-3" href="/Uzivatel/Profil">Můj profil</a>
                             <a class="btn btn-outline-danger ms-3" href="/Uzivatel/Odhlaseni">Odhlásit se</a>
                         }
                     </div>
+
                 </div>
             </div>
         </nav>

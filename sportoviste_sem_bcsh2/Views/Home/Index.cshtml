@@ -21,9 +21,23 @@
             <a class="btn btn-secondary" href="/Rezervace">Zobrazit</a>
         </div>
         <div class="col-md-4">
-            <h3>Registrace klientů</h3>
-            <p>Přihlaste se nebo si vytvořte účet pro správu rezervací.</p>
-            <a class="btn btn-secondary" href="/Klienti">Registrovat</a>
+            
+            @if (string.IsNullOrEmpty(Context.Session.GetString("UzivatelJmeno")))
+            {
+                <h3>Registrace klientů</h3>
+                <p>Přihlaste se nebo si vytvořte účet pro správu rezervací.</p>
+                <a class="btn btn-outline-secondary" href="/Uzivatel/Registrace">Registrovat se</a>
+                <a class="btn btn-outline-secondary" href="/Uzivatel/Prihlaseni">Přihlásit se</a>
+
+            }
+            else
+            {
+                <h3>Profil uživatele</h3>
+                <p>Prohlédněte si své osobní údaje a rezervace.</p>
+                <a class="btn btn-outline-primary ms-3" href="/Uzivatel/Profil">Můj profil</a>
+                <a class="btn btn-outline-danger ms-3" href="/Uzivatel/Odhlaseni">Odhlásit se</a>
+
+            }
         </div>
     </div>
 
