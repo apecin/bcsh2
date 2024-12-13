@@ -1,16 +1,77 @@
-﻿@model sportoviste_sem_bcsh2.Models.Sportoviste
-@{
-    ViewData["Title"] = "Vytvořit sportoviště";
+﻿@model sportoviste_sem_bcsh2.Models.Rezervace
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Chyby:</strong>
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                @error.ErrorMessage
+            }
+        </ul>
+    </div>
 }
 
-<h2>Vytvořit nové sportoviště</h2>
+<h2>Vytvořit rezervaci</h2>
 
 <form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <!-- Dropdown pro výběr hřiště -->
     <div class="mb-3">
-        <label for="nazev" class="form-label">Název</label>
-        <input type="text" class="form-control" id="nazev" name="Nazev" required>
+        <label for="HristeId" class="form-label">Hřiště</label>
+        <select id="hristeDropdown" asp-for="HristeId" asp-items="@(new SelectList(ViewBag.HristeList, "Id", "Nazev", Model?.HristeId))" class="form-control" onchange="updateTimeSlots()" required>
+            <option value="">-- Vyberte hřiště --</option>
+        </select>
     </div>
-    <button type="submit" class="btn btn-success">Vytvořit</button>
+    
+
+
+    <!-- Výběr data -->
+    <div class="mb-3">
+        <label asp-for="Cas" class="form-label">Datum rezervace</label>
+        <input asp-for="Cas" class="form-control" type="date" required />
+    </div>
+
+    <!-- Dropdown pro výběr času -->
+    <div class="mb-3">
+        <label for="vybranyCas" class="form-label">Čas rezervace</label>
+        <select id="timeDropdown" class="form-control" name="vybranyCas" required>
+            <option value="">-- Vyberte čas --</option>
+        </select>
+    </div>
+
+    <!-- Klient -->
+    <div class="mb-3">
+        <label asp-for="Klient" class="form-label">Klient</label>
+        <input asp-for="Klient" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Vytvořit rezervaci</button>
 </form>
 
-<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam sportovišť</a>
+<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam rezervací</a>
+
+<script>
+    const hristeData = @Html.Raw(Json.Serialize(ViewBag.HristeList ?? new List<dynamic>()));
+
+    function updateTimeSlots() {
+        const selectedHristeId = document.getElementById("hristeDropdown").value;
+        const selectedHriste = hristeData.find(h => h.id == selectedHristeId);
+
+        const timeDropdown = document.getElementById("timeDropdown");
+        timeDropdown.innerHTML = '<option value="">-- Vyberte čas --</option>';
+
+        if (!selectedHriste) return;
+
+        const startTime = parseInt(selectedHriste.otevrenoOd.split(':')[0]);
+        const endTime = parseInt(selectedHriste.otevrenoDo.split(':')[0]);
+
+        for (let i = startTime; i < endTime; i++) {
+            const option = document.createElement("option");
+            option.value = `${i}:00:00`;
+            option.textContent = `${i}:00 - ${i + 1}:00`;
+            timeDropdown.appendChild(option);
+        }
+    }
+</script>

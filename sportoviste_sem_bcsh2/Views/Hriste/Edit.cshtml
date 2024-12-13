@@ -4,37 +4,49 @@
     ViewData["Title"] = "Upravit hřiště";
 }
 
-<h2>Upravit hřiště</h2>
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Upravit hřiště</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
 
-<form asp-action="Edit" method="post">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="Id" />
-    
-    <div class="mb-3">
-        <label asp-for="Nazev" class="form-label">Název hřiště</label>
-        <input asp-for="Nazev" class="form-control" required />
-        <span asp-validation-for="Nazev" class="text-danger"></span>
-    </div>
-    
-    <div class="mb-3">
-        <label asp-for="Typ" class="form-label">Typ hřiště</label>
-        <input asp-for="Typ" class="form-control" required />
-        <span asp-validation-for="Typ" class="text-danger"></span>
-    </div>
+                <div class="mb-3">
+                    <label asp-for="Nazev" class="form-label fw-bold">Název hřiště</label>
+                    <input asp-for="Nazev" class="form-control" placeholder="Zadejte název hřiště" required />
+                    <span asp-validation-for="Nazev" class="text-danger"></span>
+                </div>
 
-    <div class="mb-3">
-        <label asp-for="SportovisteId" class="form-label">Sportoviště</label>
-        <select asp-for="SportovisteId" class="form-control" required>
-            <option value="">-- Vyberte sportoviště --</option>
-            @foreach (var sportoviste in ViewBag.SportovisteList)
-            {
-                <option value="@sportoviste.Id">@sportoviste.Nazev</option>
-            }
-        </select>
-        <span asp-validation-for="SportovisteId" class="text-danger"></span>
-    </div>
-    
-    <button type="submit" class="btn btn-success">Uložit změny</button>
-</form>
+                <div class="mb-3">
+                    <label asp-for="Typ" class="form-label fw-bold">Typ hřiště</label>
+                    <input asp-for="Typ" class="form-control" placeholder="Např. Fotbal, Basketbal" required />
+                    <span asp-validation-for="Typ" class="text-danger"></span>
+                </div>
 
-<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam hřišť</a>
+                <div class="mb-3">
+                    <label asp-for="SportovisteId" class="form-label fw-bold">Sportoviště</label>
+                    <select asp-for="SportovisteId" class="form-select" required>
+                        <option value="">-- Vyberte sportoviště --</option>
+                        @foreach (var sportoviste in ViewBag.SportovisteList)
+                        {
+                            <option value="@sportoviste.Id">@sportoviste.Nazev</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SportovisteId" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="bi bi-save"></i> Uložit změny
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg">
+                        <i class="bi bi-arrow-left"></i> Zpět na seznam
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

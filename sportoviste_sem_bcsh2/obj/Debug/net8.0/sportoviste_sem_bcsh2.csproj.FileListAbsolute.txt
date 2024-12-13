@@ -36,6 +36,8 @@ C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\bin\Debug\net8.0\sport
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\bin\Debug\net8.0\sportoviste_sem_bcsh2.runtimeconfig.json
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\bin\Debug\net8.0\sportoviste_sem_bcsh2.dll
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\bin\Debug\net8.0\sportoviste_sem_bcsh2.pdb
+C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\bin\Debug\net8.0\LiteDB.dll
+C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.csproj.AssemblyReference.cache
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.AssemblyInfoInputs.cache
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.AssemblyInfo.cs
@@ -54,11 +56,9 @@ C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\stati
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\scopedcss\bundle\sportoviste_sem_bcsh2.styles.css
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\scopedcss\projectbundle\sportoviste_sem_bcsh2.bundle.scp.css
+C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.csproj.CopyComplete
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.dll
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\refint\sportoviste_sem_bcsh2.dll
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.pdb
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.genruntimeconfig.cache
 C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\ref\sportoviste_sem_bcsh2.dll
-C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.csproj.AssemblyReference.cache
-C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\bin\Debug\net8.0\LiteDB.dll
-C:\Users\ntb\source\repos\bcsh2_sem\sportoviste_sem_bcsh2\obj\Debug\net8.0\sportoviste_sem_bcsh2.csproj.CopyComplete

@@ -1,0 +1,20 @@
+﻿@model sportoviste_sem_bcsh2.Models.Rezervace
+
+<h2>Detail rezervace</h2>
+
+<table class="table">
+    <tr>
+        <th>Hřiště</th>
+        <td>@Model.Hriste?.Nazev</td>
+    </tr>
+    <tr>
+        <th>Klient</th>
+        <td>@Model.Klient</td>
+    </tr>
+    <tr>
+        <th>Datum a čas</th>
+        <td>@Model.Cas.ToString("dd.MM.yyyy HH:mm")</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Zpět na seznam rezervací</a>

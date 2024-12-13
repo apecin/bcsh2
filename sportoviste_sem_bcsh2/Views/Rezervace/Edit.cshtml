@@ -1,0 +1,50 @@
+﻿@model sportoviste_sem_bcsh2.Models.Rezervace
+
+<h2>Upravit rezervaci</h2>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <!-- Dropdown pro výběr hřiště -->
+    <div class="mb-3">
+        <label for="HristeId" class="form-label">Hřiště</label>
+        <select id="hristeDropdown" asp-for="HristeId" asp-items="@(new SelectList(ViewBag.HristeList, "Id", "Nazev", Model.HristeId))" class="form-control" required>
+            <option value="">-- Vyberte hřiště --</option>
+        </select>
+    </div>
+
+    <!-- Výběr data -->
+    <div class="mb-3">
+        <label asp-for="Cas" class="form-label">Datum rezervace</label>
+        <input asp-for="Cas" class="form-control" type="date" required />
+    </div>
+
+    <!-- Výběr času -->
+    <div class="mb-3">
+        <label class="form-label">Čas rezervace</label>
+        <select id="timeDropdown" name="vybranyCas" class="form-control" required>
+            <option value="">-- Vyberte čas --</option>
+            @foreach (var time in ViewBag.AvailableTimes ?? new List<string>())
+            {
+                string isSelected = Model.Cas.ToString("HH:mm") == time ? "selected=\"selected\"" : "";
+                @Html.Raw($"<option value=\"{time}\" {isSelected}>{time}</option>")
+            }
+        </select>
+
+
+
+
+    </div>
+
+    <!-- Automaticky vyplněný klient -->
+    <div class="mb-3">
+        <label asp-for="Klient" class="form-label">Klient</label>
+        <input asp-for="Klient" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Uložit změny</button>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam rezervací</a>
+

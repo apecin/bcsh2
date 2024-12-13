@@ -3,7 +3,14 @@
 @{
     ViewData["Title"] = "Vytvořit hřiště";
 }
-
+@if (ViewBag.Zprava != null)
+{
+    <div class="alert alert-danger">@ViewBag.Zprava</div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
 <h2>Vytvořit nové hřiště</h2>
 
 <form asp-action="Create" method="post">
@@ -18,6 +25,15 @@
         <input asp-for="Typ" class="form-control" required />
         <span asp-validation-for="Typ" class="text-danger"></span>
     </div>
+    <div class="mb-3">
+        <label asp-for="OtevrenoOd" class="form-label">Otevřeno od</label>
+        <input asp-for="OtevrenoOd" class="form-control" type="time" required />
+    </div>
+    <div class="mb-3">
+        <label asp-for="OtevrenoDo" class="form-label">Otevřeno do</label>
+        <input asp-for="OtevrenoDo" class="form-control" type="time" required />
+    </div>
+
     <div class="mb-3">
         <label asp-for="SportovisteId" class="form-label">Přiřadit ke sportovišti</label>
         <select asp-for="SportovisteId" class="form-control" required>

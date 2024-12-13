@@ -1,32 +1,72 @@
 ﻿@model IEnumerable<Hriste>
 
 @{
-    ViewData["Title"] = "Hřiště";
+    ViewData["Title"] = "Seznam hřišť";
 }
 
-<h2>Seznam hřišť</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Název</th>
-            <th>Typ</th>
-            <th>Akce</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var hriste in Model)
-        {
-            <tr>
-                <td>@hriste.Nazev</td>
-                <td>@hriste.Typ</td>
-                <td>
-                    <a href="/Hriste/Details/@hriste.Id" class="btn btn-info btn-sm">Detail</a>
-                    <a href="/Hriste/Edit/@hriste.Id" class="btn btn-warning btn-sm">Upravit</a>
-                    <a href="/Hriste/Delete/@hriste.Id" class="btn btn-danger btn-sm">Smazat</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Seznam hřišť</h2>
+        <a href="/Hriste/Create" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-lg"></i> Přidat nové hřiště
+        </a>
+    </div>
 
-<a href="/Hriste/Create" class="btn btn-primary mt-3">Přidat nové hřiště</a>
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Název</th>
+                        <th>Typ</th>
+                        <th>Sportoviště</th>
+                        <th class="text-end">Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">
+                                <i>Žádná hřiště nebyla nalezena.</i>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var hriste in Model)
+                        {
+                            <tr>
+                                <td>@hriste.Nazev</td>
+                                <td>@hriste.Typ</td>
+                                <td>
+                                    @if (hriste.Sportoviste != null)
+                                    {
+                                        <a href="/Sportoviste/Details/@hriste.Sportoviste.Id" class="text-decoration-none fw-bold text-primary">
+                                            @hriste.Sportoviste.Nazev
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger fw-bold">Nepřiřazeno</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <a href="/Hriste/Details/@hriste.Id" class="btn btn-sm btn-outline-info me-2">
+                                        <i class="bi bi-eye"></i> Detail
+                                    </a>
+                                    <a href="/Hriste/Edit/@hriste.Id" class="btn btn-sm btn-outline-warning me-2">
+                                        <i class="bi bi-pencil"></i> Upravit
+                                    </a>
+                                    <a href="/Hriste/Delete/@hriste.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i> Smazat
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

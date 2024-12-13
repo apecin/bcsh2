@@ -62,7 +62,16 @@ namespace sportoviste_sem_bcsh2.Services
         public void DeleteSportoviste(int id) => Sportovistes.Delete(id);
 
         // CRUD operace pro Hriste
-        public IEnumerable<Hriste> GetAllHriste() => Hristes.FindAll();
+        public IEnumerable<Hriste> GetAllHriste()
+        {
+            var hristes = Hristes.FindAll().ToList();
+            foreach (var hriste in hristes)
+            {
+                hriste.Sportoviste = Sportovistes.FindById(hriste.SportovisteId);
+            }
+            return hristes;
+        }
+
 
         // Metoda pro načtení hřiště podle Id
         public Hriste? GetHristeById(int id)
@@ -105,14 +114,15 @@ namespace sportoviste_sem_bcsh2.Services
         // CRUD operace pro Rezervace
         public IEnumerable<Rezervace> GetAllRezervace() => Rezervaces.FindAll();
 
-        public Rezervace? GetRezervaceById(int id) => Rezervaces.FindById(id);
 
         public void InsertRezervace(Rezervace rezervace)
         {
             if (rezervace.Id == 0)
             {
-                rezervace.Id = (Rezervaces.Max(x => (int?)x.Id) ?? 0) + 1;
+                // Bezpečná kontrola prázdné kolekce
+                rezervace.Id = Rezervaces.Count() > 0 ? Rezervaces.Max(x => x.Id) + 1 : 1;
             }
+
             Console.WriteLine($"Vkládám rezervaci: Hřiště = {rezervace.Hriste}, Klient = {rezervace.Klient}, Id = {rezervace.Id}");
             Rezervaces.Insert(rezervace);
         }
@@ -120,6 +130,17 @@ namespace sportoviste_sem_bcsh2.Services
         public void UpdateRezervace(Rezervace rezervace) => Rezervaces.Update(rezervace);
 
         public void DeleteRezervace(int id) => Rezervaces.Delete(id);
+
+        public Rezervace? GetRezervaceById(int id)
+        {
+            var rezervace = Rezervaces.FindById(id);
+            if (rezervace != null)
+            {
+                rezervace.Hriste = Hristes.FindById(rezervace.HristeId);
+            }
+            return rezervace;
+        }
+
 
         // CRUD operace pro Uzivatel
         public IEnumerable<Uzivatel> GetAllUzivatele() => Uzivatele.FindAll();

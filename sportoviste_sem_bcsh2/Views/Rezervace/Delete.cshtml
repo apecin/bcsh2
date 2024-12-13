@@ -1,0 +1,27 @@
+﻿@model sportoviste_sem_bcsh2.Models.Rezervace
+
+<h2>Potvrzení smazání</h2>
+
+<p>Opravdu chcete smazat tuto rezervaci?</p>
+
+<table class="table">
+    <tr>
+        <th>Hřiště</th>
+        <td>@Model.Hriste?.Nazev</td>
+    </tr>
+    <tr>
+        <th>Klient</th>
+        <td>@Model.Klient</td>
+    </tr>
+    <tr>
+        <th>Datum a čas</th>
+        <td>@Model.Cas.ToString("dd.MM.yyyy HH:mm")</td>
+    </tr>
+</table>
+
+<form asp-action="DeleteConfirmed" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger btn-sm">Smazat</button>
+    <a asp-action="Index" class="btn btn-secondary btn-sm">Zpět</a>
+</form>
