@@ -177,6 +177,10 @@ namespace sportoviste_sem_bcsh2.Controllers
 
             return View(uzivatel);
         }
-
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
     }
 }

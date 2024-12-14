@@ -1,50 +1,48 @@
 ﻿@model sportoviste_sem_bcsh2.Models.Rezervace
 
-<h2>Upravit rezervaci</h2>
+<div class="card shadow-lg p-4">
+    <h2 class="text-secondary mb-4">Upravit rezervaci</h2>
 
-<form asp-action="Edit" method="post">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="Id" />
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
 
-    <!-- Dropdown pro výběr hřiště -->
-    <div class="mb-3">
-        <label for="HristeId" class="form-label">Hřiště</label>
-        <select id="hristeDropdown" asp-for="HristeId" asp-items="@(new SelectList(ViewBag.HristeList, "Id", "Nazev", Model.HristeId))" class="form-control" required>
-            <option value="">-- Vyberte hřiště --</option>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="HristeId" class="form-label fw-bold">Hřiště</label>
+            <select id="hristeDropdown" asp-for="HristeId" asp-items="@(new SelectList(ViewBag.HristeList, "Id", "Nazev", Model.HristeId))" class="form-select" required>
+                <option value="">-- Vyberte hřiště --</option>
+            </select>
+        </div>
 
-    <!-- Výběr data -->
-    <div class="mb-3">
-        <label asp-for="Cas" class="form-label">Datum rezervace</label>
-        <input asp-for="Cas" class="form-control" type="date" required />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Cas" class="form-label fw-bold">Datum rezervace</label>
+            <input asp-for="Cas" class="form-control" type="date" required />
+        </div>
 
-    <!-- Výběr času -->
-    <div class="mb-3">
-        <label class="form-label">Čas rezervace</label>
-        <select id="timeDropdown" name="vybranyCas" class="form-control" required>
-            <option value="">-- Vyberte čas --</option>
-            @foreach (var time in ViewBag.AvailableTimes ?? new List<string>())
-            {
-                string isSelected = Model.Cas.ToString("HH:mm") == time ? "selected=\"selected\"" : "";
-                @Html.Raw($"<option value=\"{time}\" {isSelected}>{time}</option>")
-            }
-        </select>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Čas rezervace</label>
+            <select id="timeDropdown" name="vybranyCas" class="form-select" required>
+                <option value="">-- Vyberte čas --</option>
+                @foreach (var time in ViewBag.AvailableTimes ?? new List<string>())
+                {
+                    string isSelected = Model.Cas.ToString("HH:mm") == time ? "selected=\"selected\"" : "";
+                    @Html.Raw($"<option value=\"{time}\" {isSelected}>{time}</option>")
+                }
+            </select>
+        </div>
 
+        <div class="mb-3">
+            <label asp-for="Klient" class="form-label fw-bold">Klient</label>
+            <input asp-for="Klient" class="form-control" readonly />
+        </div>
 
-
-
-    </div>
-
-    <!-- Automaticky vyplněný klient -->
-    <div class="mb-3">
-        <label asp-for="Klient" class="form-label">Klient</label>
-        <input asp-for="Klient" class="form-control" readonly />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Uložit změny</button>
-</form>
-
-<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam rezervací</a>
-
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-outline-success btn-lg">
+                <i class="bi bi-pencil"></i> Uložit změny
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-arrow-left"></i> Zpět
+            </a>
+        </div>
+    </form>
+</div>

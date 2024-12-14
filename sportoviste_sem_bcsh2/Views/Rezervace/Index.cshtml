@@ -1,53 +1,65 @@
 ﻿@model IEnumerable<sportoviste_sem_bcsh2.Models.Rezervace>
 
-@{
-    ViewData["Title"] = "Seznam rezervací";
-}
+<div class="card shadow-lg p-4">
+    <h2 class="text-secondary mb-4">Seznam rezervací</h2>
 
-<h2 class="mb-4">Seznam rezervací</h2>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">
+            <strong>Žádné rezervace nebyly nalezeny.</strong> Můžete vytvořit novou rezervaci pomocí tlačítka níže.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>Hřiště</th>
+                        <th>Klient</th>
+                        <th>Datum a čas</th>
+                        <th class="text-center">Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rezervace in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (rezervace.Hriste != null)
+                                {
+                                    @rezervace.Hriste.Nazev
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Hřiště nenalezeno</span>
+                                }
+                            </td>
+                            <td>@rezervace.Klient</td>
+                            <td>@rezervace.Cas.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="/Rezervace/Details/@rezervace.Id" class="btn btn-outline-info btn-sm">
+                                        <i class="bi bi-eye"></i> Detail
+                                    </a>
+                                    <a href="/Rezervace/Edit/@rezervace.Id" class="btn btn-outline-warning btn-sm">
+                                        <i class="bi bi-pencil"></i> Upravit
+                                    </a>
+                                    <a href="/Rezervace/Delete/@rezervace.Id" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i> Smazat
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 
-@if (!Model.Any())
-{
-    <div class="alert alert-warning">
-        <strong>Žádné rezervace nebyly nalezeny.</strong> Můžete vytvořit novou rezervaci pomocí tlačítka níže.
+    <div class="mt-4 text-center">
+        <a href="/Rezervace/Create" class="btn btn-outline-success btn-lg">
+            <i class="bi bi-plus-lg"></i> Vytvořit novou rezervaci
+        </a>
     </div>
-}
-else
-{
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Hřiště</th>
-                <th>Klient</th>
-                <th>Datum a čas</th>
-                <th class="text-center">Akce</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var rezervace in Model)
-            {
-                <tr>
-                    <td>
-                        @if (rezervace.Hriste != null)
-                        {
-                            @rezervace.Hriste.Nazev
-                        }
-                        else
-                        {
-                            <span class="text-danger">Hřiště nenalezeno</span>
-                        }
-                    </td>
-                    <td>@rezervace.Klient</td>
-                    <td>@rezervace.Cas.ToString("dd.MM.yyyy HH:mm")</td>
-                    <td class="text-center">
-                        <a href="/Rezervace/Details/@rezervace.Id" class="btn btn-info btn-sm me-1">Detail</a>
-                        <a href="/Rezervace/Edit/@rezervace.Id" class="btn btn-warning btn-sm me-1">Upravit</a>
-                        <a href="/Rezervace/Delete/@rezervace.Id" class="btn btn-danger btn-sm">Smazat</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-<a href="/Rezervace/Create" class="btn btn-primary mt-3">Vytvořit novou rezervaci</a>
+</div>

@@ -24,6 +24,14 @@ namespace sportoviste_sem_bcsh2
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+            // Pøidání služby pøi odepøení pøístupu
+            builder.Services.AddAuthentication("CookieAuth")
+            .AddCookie("CookieAuth", options =>
+            {
+                options.LoginPath = "/Uzivatel/Prihlaseni"; 
+                options.AccessDeniedPath = "/Uzivatel/AccessDenied"; 
+            });
+
 
             // Konfigurace Data Protection (pøed builder.Build())
             builder.Services.AddDataProtection()

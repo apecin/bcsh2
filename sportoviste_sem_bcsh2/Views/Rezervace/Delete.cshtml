@@ -1,27 +1,33 @@
 ﻿@model sportoviste_sem_bcsh2.Models.Rezervace
 
-<h2>Potvrzení smazání</h2>
+<div class="card shadow-lg p-4">
+    <h2 class="text-secondary mb-4">Potvrzení smazání</h2>
 
-<p>Opravdu chcete smazat tuto rezervaci?</p>
+    <p class="fs-5"><strong>Opravdu chcete smazat tuto rezervaci?</strong></p>
 
-<table class="table">
-    <tr>
-        <th>Hřiště</th>
-        <td>@Model.Hriste?.Nazev</td>
-    </tr>
-    <tr>
-        <th>Klient</th>
-        <td>@Model.Klient</td>
-    </tr>
-    <tr>
-        <th>Datum a čas</th>
-        <td>@Model.Cas.ToString("dd.MM.yyyy HH:mm")</td>
-    </tr>
-</table>
+    <table class="table table-bordered">
+        <tr>
+            <th class="table-light">Hřiště</th>
+            <td>@Model.Hriste?.Nazev</td>
+        </tr>
+        <tr>
+            <th class="table-light">Klient</th>
+            <td>@Model.Klient</td>
+        </tr>
+        <tr>
+            <th class="table-light">Datum a čas</th>
+            <td>@Model.Cas.ToString("dd.MM.yyyy HH:mm")</td>
+        </tr>
+    </table>
 
-<form asp-action="DeleteConfirmed" method="post">
-    @Html.AntiForgeryToken()
-    <input type="hidden" name="id" value="@Model.Id" />
-    <button type="submit" class="btn btn-danger btn-sm">Smazat</button>
-    <a asp-action="Index" class="btn btn-secondary btn-sm">Zpět</a>
-</form>
+    <form asp-action="DeleteConfirmed" method="post" class="d-flex justify-content-between mt-4">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-outline-danger btn-lg">
+            <i class="bi bi-trash"></i> Smazat rezervaci
+        </button>
+        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+            <i class="bi bi-arrow-left"></i> Zpět
+        </a>
+    </form>
+</div>

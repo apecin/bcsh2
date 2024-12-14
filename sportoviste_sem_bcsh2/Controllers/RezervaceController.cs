@@ -200,13 +200,18 @@ namespace sportoviste_sem_bcsh2.Controllers
 
             // Získání jména přihlášeného uživatele ze session
             var userName = HttpContext.Session.GetString("UzivatelJmeno");
-            if (rezervace.Klient != userName)
+            var userSurname = HttpContext.Session.GetString("UzivatelPrijmeni");
+            var fullUserName = $"{userName} {userSurname}";
+
+            // Kontrola, zda rezervace patří aktuálnímu uživateli
+            if (rezervace.Klient != fullUserName)
             {
-                return Forbid(); // Pokud klient nesouhlasí s aktuálním uživatelem, vrátíme chybu 403
+                return Forbid("CookieAuth");
             }
 
             return View(rezervace);
         }
+
 
 
         [HttpPost]
@@ -221,15 +226,20 @@ namespace sportoviste_sem_bcsh2.Controllers
 
             // Získání jména přihlášeného uživatele ze session
             var userName = HttpContext.Session.GetString("UzivatelJmeno");
-            if (rezervace.Klient != userName)
+            var userSurname = HttpContext.Session.GetString("UzivatelPrijmeni");
+            var fullUserName = $"{userName} {userSurname}";
+
+            // Kontrola, zda rezervace patří aktuálnímu uživateli
+            if (rezervace.Klient != fullUserName)
             {
-                return Forbid(); 
+                return Forbid("CookieAuth");
             }
 
             _dbService.DeleteRezervace(id);
             TempData["SuccessMessage"] = "Rezervace byla úspěšně smazána.";
             return RedirectToAction(nameof(Index));
         }
+
 
 
 
