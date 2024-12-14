@@ -4,69 +4,112 @@
     ViewData["Title"] = "Seznam hřišť";
 }
 
-<div class="container">
+<div class="card shadow-lg p-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Seznam hřišť</h2>
-        <a href="/Hriste/Create" class="btn btn-primary btn-lg">
+        <h2 class="text-secondary">Seznam hřišť</h2>
+        <a href="/Hriste/Create" class="btn btn-outline-success btn-lg">
             <i class="bi bi-plus-lg"></i> Přidat nové hřiště
         </a>
     </div>
 
-    <div class="card shadow-sm">
-        <div class="card-body p-4">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>Název</th>
+                    <th>Typ</th>
+                    <th>Sportoviště</th>
+                    <th class="text-end">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
                     <tr>
-                        <th>Název</th>
-                        <th>Typ</th>
-                        <th>Sportoviště</th>
-                        <th class="text-end">Akce</th>
+                        <td colspan="4" class="text-center text-muted">
+                            <i>Žádná hřiště nebyla nalezena.</i>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @if (!Model.Any())
+                }
+                else
+                {
+                    @foreach (var hriste in Model)
                     {
                         <tr>
-                            <td colspan="4" class="text-center text-muted">
-                                <i>Žádná hřiště nebyla nalezena.</i>
+                            <td><strong>@hriste.Nazev</strong></td>
+                            <td>@hriste.Typ</td>
+                            <td>
+                                @if (hriste.Sportoviste != null)
+                                {
+                                    <a href="/Sportoviste/Details/@hriste.Sportoviste.Id" class="text-decoration-none fw-bold text-secondary">
+                                        @hriste.Sportoviste.Nazev
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-danger fw-bold">Nepřiřazeno</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a href="/Hriste/Details/@hriste.Id" class="btn btn-sm btn-outline-info me-2">
+                                    <i class="bi bi-eye"></i> Detail
+                                </a>
+                                <a href="/Hriste/Edit/@hriste.Id" class="btn btn-sm btn-outline-warning me-2">
+                                    <i class="bi bi-pencil"></i> Upravit
+                                </a>
+                                <a href="/Hriste/Delete/@hriste.Id" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i> Smazat
+                                </a>
                             </td>
                         </tr>
                     }
-                    else
-                    {
-                        @foreach (var hriste in Model)
-                        {
-                            <tr>
-                                <td>@hriste.Nazev</td>
-                                <td>@hriste.Typ</td>
-                                <td>
-                                    @if (hriste.Sportoviste != null)
-                                    {
-                                        <a href="/Sportoviste/Details/@hriste.Sportoviste.Id" class="text-decoration-none fw-bold text-primary">
-                                            @hriste.Sportoviste.Nazev
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <span class="text-danger fw-bold">Nepřiřazeno</span>
-                                    }
-                                </td>
-                                <td class="text-end">
-                                    <a href="/Hriste/Details/@hriste.Id" class="btn btn-sm btn-outline-info me-2">
-                                        <i class="bi bi-eye"></i> Detail
-                                    </a>
-                                    <a href="/Hriste/Edit/@hriste.Id" class="btn btn-sm btn-outline-warning me-2">
-                                        <i class="bi bi-pencil"></i> Upravit
-                                    </a>
-                                    <a href="/Hriste/Delete/@hriste.Id" class="btn btn-sm btn-outline-danger">
-                                        <i class="bi bi-trash"></i> Smazat
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+
+<style>
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 15px;
+    }
+
+    h2 {
+        color: #6c757d;
+        font-weight: 700;
+    }
+
+    .btn-outline-success {
+        background-color: #e9f7f0;
+        color: #155724;
+        border: 2px solid #d1e7dd;
+    }
+
+        .btn-outline-success:hover {
+            background-color: #d1e7dd;
+        }
+
+    .table {
+        margin-top: 20px;
+    }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            padding: 15px;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+
+    .table-light {
+        background-color: #f8f9fa;
+    }
+
+    .text-muted {
+        font-size: 0.9rem;
+    }
+
+</style>

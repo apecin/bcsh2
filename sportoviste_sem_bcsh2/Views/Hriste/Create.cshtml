@@ -3,49 +3,111 @@
 @{
     ViewData["Title"] = "Vytvořit hřiště";
 }
-@if (ViewBag.Zprava != null)
-{
-    <div class="alert alert-danger">@ViewBag.Zprava</div>
-}
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-}
-<h2>Vytvořit nové hřiště</h2>
 
-<form asp-action="Create" method="post">
-    @Html.AntiForgeryToken()
-    <div class="mb-3">
-        <label asp-for="Nazev" class="form-label">Název hřiště</label>
-        <input asp-for="Nazev" class="form-control" required />
-        <span asp-validation-for="Nazev" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Typ" class="form-label">Typ hřiště</label>
-        <input asp-for="Typ" class="form-control" required />
-        <span asp-validation-for="Typ" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="OtevrenoOd" class="form-label">Otevřeno od</label>
-        <input asp-for="OtevrenoOd" class="form-control" type="time" required />
-    </div>
-    <div class="mb-3">
-        <label asp-for="OtevrenoDo" class="form-label">Otevřeno do</label>
-        <input asp-for="OtevrenoDo" class="form-control" type="time" required />
-    </div>
+<div class="card shadow-lg p-4">
+    <h2 class="text-secondary mb-4">Vytvořit nové hřiště</h2>
 
-    <div class="mb-3">
-        <label asp-for="SportovisteId" class="form-label">Přiřadit ke sportovišti</label>
-        <select asp-for="SportovisteId" class="form-control" required>
-            <option value="">-- Vyberte sportoviště --</option>
-            @foreach (var sportoviste in ViewBag.SportovisteList)
-            {
-                <option value="@sportoviste.Id">@sportoviste.Nazev</option>
-            }
-        </select>
-        <span asp-validation-for="SportovisteId" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-success">Vytvořit</button>
-</form>
+    @if (ViewBag.Zprava != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Zprava</div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
 
-<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam hřišť</a>
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-4">
+            <label asp-for="Nazev" class="form-label fw-bold">Název hřiště</label>
+            <input asp-for="Nazev" class="form-control" placeholder="Zadejte název hřiště" required />
+            <span asp-validation-for="Nazev" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Typ" class="form-label fw-bold">Typ hřiště</label>
+            <input asp-for="Typ" class="form-control" placeholder="Např. Fotbal, Basketbal" required />
+            <span asp-validation-for="Typ" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="OtevrenoOd" class="form-label fw-bold">Otevřeno od</label>
+            <input asp-for="OtevrenoOd" type="time" class="form-control" required />
+            <span asp-validation-for="OtevrenoOd" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="OtevrenoDo" class="form-label fw-bold">Otevřeno do</label>
+            <input asp-for="OtevrenoDo" type="time" class="form-control" required />
+            <span asp-validation-for="OtevrenoDo" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="SportovisteId" class="form-label fw-bold">Přiřadit ke sportovišti</label>
+            <select asp-for="SportovisteId" class="form-select" required>
+                <option value="">-- Vyberte sportoviště --</option>
+                @foreach (var sportoviste in ViewBag.SportovisteList)
+                {
+                    <option value="@sportoviste.Id">@sportoviste.Nazev</option>
+                }
+            </select>
+            <span asp-validation-for="SportovisteId" class="text-danger small"></span>
+        </div>
+
+        <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-outline-success btn-lg me-3">
+                <i class="bi bi-plus-lg"></i> Vytvořit
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-arrow-left"></i> Zpět na seznam
+            </a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 15px;
+    }
+
+    h2 {
+        color: #6c757d;
+        font-weight: 700;
+    }
+
+    .btn-outline-success {
+        background-color: #e9f7f0;
+        color: #155724;
+        border: 2px solid #d1e7dd;
+    }
+
+        .btn-outline-success:hover {
+            background-color: #d1e7dd;
+        }
+
+    .btn-outline-secondary {
+        color: #6c757d;
+        border: 2px solid #e2e3e5;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #e2e3e5;
+        }
+
+    .form-control,
+    .form-select {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+    }
+
+    .alert {
+        font-size: 1rem;
+        padding: 10px;
+    }
+</style>

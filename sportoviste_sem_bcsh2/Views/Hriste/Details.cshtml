@@ -4,28 +4,111 @@
     ViewData["Title"] = "Detail hřiště";
 }
 
-<h2>Detail hřiště: @Model.Nazev</h2>
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-secondary text-white">
+            <h2 class="mb-0 text-center">Detail hřiště</h2>
+        </div>
+        <div class="card-body p-4">
+            <dl class="row">
+                <dt class="col-sm-4 fw-bold">Název</dt>
+                <dd class="col-sm-8">@Model.Nazev</dd>
 
-<dl class="row">
-    <dt class="col-sm-3">Název</dt>
-    <dd class="col-sm-9">@Model.Nazev</dd>
+                <dt class="col-sm-4 fw-bold">Typ</dt>
+                <dd class="col-sm-8">@Model.Typ</dd>
 
-    <dt class="col-sm-3">Typ</dt>
-    <dd class="col-sm-9">@Model.Typ</dd>
+                <dt class="col-sm-4 fw-bold">Sportoviště</dt>
+                <dd class="col-sm-8">
+                    @if (Model.Sportoviste != null)
+                    {
+                        <a href="/Sportoviste/Details/@Model.Sportoviste.Id" class="text-decoration-none">
+                            @Model.Sportoviste.Nazev
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="text-danger">Nepřiřazeno</span>
+                    }
+                </dd>
 
-    <dt class="col-sm-3">Ssportoviště</dt>
-    <dd class="col-sm-9">
-        @if (Model.Sportoviste != null)
-        {
-            <a href="/Sportoviste/Details/@Model.Sportoviste.Id">@Model.Sportoviste.Nazev</a>
-        }
-        else
-        {
-            <span class="text-danger">Žádné sportoviště není přiřazeno.</span>
-        }
-    </dd>
-</dl>
+                <dt class="col-sm-4 fw-bold">Otevřeno od</dt>
+                <dd class="col-sm-8">@Model.OtevrenoOd.ToString(@"hh\:mm")</dd>
 
-<a href="/Hriste/Edit/@Model.Id" class="btn btn-warning">Upravit</a>
-<a href="/Hriste/Delete/@Model.Id" class="btn btn-danger">Smazat</a>
-<a href="/Hriste" class="btn btn-secondary">Zpět na seznam hřišť</a>
+                <dt class="col-sm-4 fw-bold">Otevřeno do</dt>
+                <dd class="col-sm-8">@Model.OtevrenoDo.ToString(@"hh\:mm")</dd>
+            </dl>
+
+            <div class="mt-4 text-center">
+                <a href="/Hriste/Edit/@Model.Id" class="btn btn-outline-warning btn-lg me-3">
+                    <i class="bi bi-pencil"></i> Upravit
+                </a>
+                <a href="/Hriste/Delete/@Model.Id" class="btn btn-outline-danger btn-lg">
+                    <i class="bi bi-trash"></i> Smazat
+                </a>
+                <a href="/Hriste" class="btn btn-outline-secondary btn-lg ms-3">
+                    <i class="bi bi-arrow-left"></i> Zpět na seznam
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 800px;
+    }
+
+    .card-header {
+        background-color: #6c757d;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .card-body {
+        border-radius: 15px;
+        background-color: #f8f9fa;
+    }
+
+    .row dt {
+        font-size: 1.1rem;
+    }
+
+    .row dd {
+        font-size: 1rem;
+    }
+
+    .btn-lg {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+    }
+
+    .btn-outline-warning {
+        color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    .btn-outline-danger {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-outline-warning:hover {
+        background-color: #ffc107;
+        color: #fff;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #6c757d;
+        color: #fff;
+    }
+</style>
