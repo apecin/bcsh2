@@ -1,30 +1,51 @@
 ﻿@model IEnumerable<Sportoviste>
 
-@{
-    ViewData["Title"] = "Sportoviště";
-}
+<div class="card shadow-lg p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-secondary">Seznam sportovišť</h2>
+        <a href="/Sportoviste/Create" class="btn btn-outline-success btn-lg">
+            <i class="bi bi-plus-lg"></i> Přidat nové sportoviště
+        </a>
+    </div>
 
-<h2>Seznam sportovišť</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Název</th>
-            <th>Akce</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var sportoviste in Model)
-        {
-            <tr>
-                <td>@sportoviste.Nazev</td>
-                <td>
-                    <a href="/Sportoviste/Details/@sportoviste.Id" class="btn btn-info btn-sm">Detail</a>
-                    <a href="/Sportoviste/Edit/@sportoviste.Id" class="btn btn-warning btn-sm">Upravit</a>
-                    <a href="/Sportoviste/Delete/@sportoviste.Id" class="btn btn-danger btn-sm">Smazat</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a href="/Sportoviste/Create" class="btn btn-primary mt-3">Přidat nové sportoviště</a>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>Název</th>
+                    <th class="text-end">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="2" class="text-center text-muted">
+                            <i>Žádná sportoviště nebyla nalezena.</i>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var sportoviste in Model)
+                    {
+                        <tr>
+                            <td><strong>@sportoviste.Nazev</strong></td>
+                            <td class="text-end">
+                                <a href="/Sportoviste/Details/@sportoviste.Id" class="btn btn-sm btn-outline-info me-2">
+                                    <i class="bi bi-eye"></i> Detail
+                                </a>
+                                <a href="/Sportoviste/Edit/@sportoviste.Id" class="btn btn-sm btn-outline-warning me-2">
+                                    <i class="bi bi-pencil"></i> Upravit
+                                </a>
+                                <a href="/Sportoviste/Delete/@sportoviste.Id" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i> Smazat
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

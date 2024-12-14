@@ -1,16 +1,50 @@
 ﻿@model sportoviste_sem_bcsh2.Models.Sportoviste
-@{
-    ViewData["Title"] = "Vytvořit sportoviště";
-}
 
-<h2>Vytvořit nové sportoviště</h2>
+<div class="card shadow-lg p-4">
+    <h2 class="text-secondary mb-4">Vytvořit nové sportoviště</h2>
 
-<form method="post" asp-action="Create">
-    <div class="mb-3">
-        <label for="nazev" class="form-label">Název</label>
-        <input type="text" class="form-control" id="nazev" name="Nazev" required>
-    </div>
-    <button type="submit" class="btn btn-success">Vytvořit</button>
-</form>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
 
-<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam sportovišť</a>
+    <form method="post" asp-action="Create">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-4">
+            <label for="nazev" class="form-label fw-bold">Název</label>
+            <input type="text" class="form-control" id="nazev" name="Nazev" placeholder="Zadejte název sportoviště" required />
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-outline-success btn-lg">
+                <i class="bi bi-plus-lg"></i> Vytvořit
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-arrow-left"></i> Zpět na seznam
+            </a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 15px;
+    }
+
+    h2 {
+        color: #6c757d;
+        font-weight: 700;
+    }
+
+    .btn-outline-success {
+        background-color: #e9f7f0;
+        color: #155724;
+        border: 2px solid #d1e7dd;
+    }
+
+        .btn-outline-success:hover {
+            background-color: #d1e7dd;
+        }
+</style>

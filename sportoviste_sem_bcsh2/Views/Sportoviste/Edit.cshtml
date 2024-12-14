@@ -1,17 +1,24 @@
 ﻿@model sportoviste_sem_bcsh2.Models.Sportoviste
-@{
-    ViewData["Title"] = "Upravit sportoviště";
-}
 
-<h2>Upravit sportoviště</h2>
+<div class="card shadow-lg p-4">
+    <h2 class="text-secondary mb-4">Upravit sportoviště</h2>
 
-<form method="post" asp-action="Edit">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <div class="mb-3">
-        <label for="nazev" class="form-label">Název</label>
-        <input type="text" class="form-control" id="nazev" name="Nazev" value="@Model.Nazev" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Uložit změny</button>
-</form>
+    <form method="post" asp-action="Edit">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Id" value="@Model.Id" />
 
-<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam sportovišť</a>
+        <div class="mb-4">
+            <label for="nazev" class="form-label fw-bold">Název</label>
+            <input type="text" class="form-control" id="nazev" name="Nazev" value="@Model.Nazev" placeholder="Zadejte název sportoviště" required />
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-save"></i> Uložit změny
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-arrow-left"></i> Zpět na seznam
+            </a>
+        </div>
+    </form>
+</div>

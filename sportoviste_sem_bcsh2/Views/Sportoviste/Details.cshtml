@@ -1,28 +1,33 @@
 ﻿@model Sportoviste
 
-@{
-    ViewData["Title"] = "Detail sportoviště";
-}
+<div class="card shadow-lg p-4">
+    <h2 class="text-secondary mb-4">Detail sportoviště: @Model.Nazev</h2>
 
-<h2>Detail sportoviště: @Model.Nazev</h2>
+    <dl class="row">
+        <dt class="col-sm-3 fw-bold">Název</dt>
+        <dd class="col-sm-9">@Model.Nazev</dd>
+    </dl>
 
-<dl class="row">
-    <dt class="col-sm-3">Název</dt>
-    <dd class="col-sm-9">@Model.Nazev</dd>
-</dl>
+    <h3 class="mt-4">Hřiště</h3>
+    @if (Model.Hriste != null && Model.Hriste.Any())
+    {
+        <ul class="list-group">
+            @foreach (var hriste in Model.Hriste)
+            {
+                <li class="list-group-item">
+                    <strong>@hriste.Nazev</strong> - <span class="text-muted">@hriste.Typ</span>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="text-muted"><i>Žádné hřiště není přidáno k tomuto sportovišti.</i></p>
+    }
 
-<h3>Hřiště</h3>
-@if (Model.Hriste != null && Model.Hriste.Any())
-{
-    <ul>
-        @foreach (var hriste in Model.Hriste)
-        {
-            <li>@hriste.Nazev - @hriste.Typ</li>
-        }
-    </ul>
-}
-else
-{
-    <p>Žádné hřiště není přidáno k tomuto sportovišti.</p>
-}
-<a asp-action="Index" class="btn btn-secondary mt-3">Zpět na seznam sportovišť</a>
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+            <i class="bi bi-arrow-left"></i> Zpět na seznam
+        </a>
+    </div>
+</div>
