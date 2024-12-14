@@ -1,0 +1,125 @@
+﻿@model IEnumerable<sportoviste_sem_bcsh2.Models.ObsazenostViewModel>
+
+@{
+    ViewData["Title"] = $"Obsazenost - {ViewBag.SelectedSportoviste}";
+}
+
+<div class="card shadow-lg p-5">
+    <h2 class="text-center text-secondary mb-5">Obsazenost - @ViewBag.SelectedSportoviste</h2>
+
+    
+
+    <h4 class="text-secondary mb-4">Datum: @ViewBag.SelectedDate?.ToString("dd.MM.yyyy")</h4>
+
+        @{
+            var earliestOpenHour = Model.Min(o => o.OtevrenoOd.Hours);
+            var latestCloseHour = Model.Max(o => o.OtevrenoDo.Hours);
+        }
+
+        <table class="table table-hover table-bordered text-center align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th class="sportoviste-column">Hřiště</th>
+                    @for (var hour = earliestOpenHour; hour < latestCloseHour; hour++)
+                    {
+                        <th>@hour:00 - @(hour + 1):00</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obs in Model)
+                {
+                    <tr>
+                        <td class="sportoviste-name">
+                            <strong>@obs.Hriste</strong>
+                            <br />
+                            <small class="text-muted">Otevřeno: @obs.OtevrenoOd.ToString(@"hh\:mm") - @obs.OtevrenoDo.ToString(@"hh\:mm")</small>
+                        </td>
+
+                        @for (var hour = earliestOpenHour; hour < latestCloseHour; hour++)
+                        {
+                            bool isWithinOpeningHours = hour >= obs.OtevrenoOd.Hours && hour < obs.OtevrenoDo.Hours;
+                            if (!isWithinOpeningHours)
+                            {
+                                <td class="closed">
+                                    <span>Zavřeno</span>
+                                </td>
+                            }
+                            else
+                            {
+                                var isReserved = obs.Rezervace.Any(r => r.Cas.Hour == hour);
+                                <td class="@(isReserved ? "reserved" : "available")">
+                                    <span>@(isReserved ? "Obsazeno" : "Volno")</span>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+  
+
+    <div class="mt-4 text-center">
+        <a href="/Rezervace/Create" class="btn btn-outline-success btn-lg me-3">
+            <i class="bi bi-plus-circle"></i> Vytvořit rezervaci
+        </a>
+        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+            <i class="bi bi-arrow-left-circle"></i> Zpět
+        </a>
+    </div>
+</div>
+
+<style>
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 20px;
+    }
+
+    .sportoviste-column {
+        width: 250px;
+        text-align: left;
+    }
+
+    .sportoviste-name {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        text-align: left;
+        padding: 15px;
+        border-right: 1px solid #dee2e6;
+    }
+
+    .available {
+        background-color: #d1e7dd;
+        color: #0f5132;
+        font-weight: bold;
+    }
+
+    .reserved {
+        background-color: #f8d7da;
+        color: #842029;
+        font-weight: bold;
+    }
+
+    .closed {
+        background-color: #e9ecef;
+        color: #6c757d;
+        font-weight: bold;
+    }
+
+    .table th,
+    .table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 15px;
+    }
+
+    .table th {
+        background-color: #f1f3f5;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+</style>
